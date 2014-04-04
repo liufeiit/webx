@@ -55,7 +55,7 @@ public class DefaultEventCartridgeConfigurer implements EventCartridgeConfigurer
                     result = getObject().addEventHandler((MethodExceptionEventHandler) handler);
                 }
                 log.info("Added EventCartridge : " + handler.getClass().getName() + " : " + result);
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				log.error(String.format("EventHandler[%s] init error.", h), e);
 			}
 		}
