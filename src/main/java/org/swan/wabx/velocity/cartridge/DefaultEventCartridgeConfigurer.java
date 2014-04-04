@@ -10,7 +10,6 @@ import org.apache.velocity.app.event.MethodExceptionEventHandler;
 import org.apache.velocity.app.event.NullSetEventHandler;
 import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.ClassUtils;
 
@@ -21,17 +20,12 @@ import org.springframework.util.ClassUtils;
  * @version 1.0
  * @since 2014年3月22日 下午8:40:56
  */
-public class DefaultEventCartridgeConfigurer implements FactoryBean<EventCartridge>, EventCartridgeConfigurer, InitializingBean {
+public class DefaultEventCartridgeConfigurer implements EventCartridgeConfigurer, InitializingBean {
 
 	protected final Log log = LogFactory.getLog(getClass());
 	protected List<String> handlers;
 	protected EventCartridge eventCartridge;
 	
-	@Override
-	public EventCartridge getEventCartridge() {
-		return eventCartridge;
-	}
-
 	@Override
 	public final void afterPropertiesSet() throws Exception {
 		try {
@@ -52,13 +46,13 @@ public class DefaultEventCartridgeConfigurer implements FactoryBean<EventCartrid
 				Object handler = BeanUtils.instantiateClass(ClassUtils.getDefaultClassLoader().loadClass(h));
 				boolean result = false;
                 if (handler instanceof ReferenceInsertionEventHandler) {
-                    result = getEventCartridge().addEventHandler((ReferenceInsertionEventHandler) handler);
+                    result = getObject().addEventHandler((ReferenceInsertionEventHandler) handler);
                 }
                 if (handler instanceof NullSetEventHandler) {
-                    result = getEventCartridge().addEventHandler((NullSetEventHandler) handler);
+                    result = getObject().addEventHandler((NullSetEventHandler) handler);
                 }
                 if (handler instanceof MethodExceptionEventHandler) {
-                    result = getEventCartridge().addEventHandler((MethodExceptionEventHandler) handler);
+                    result = getObject().addEventHandler((MethodExceptionEventHandler) handler);
                 }
                 log.info("Added EventCartridge : " + handler.getClass().getName() + " : " + result);
 			} catch (Exception e) {

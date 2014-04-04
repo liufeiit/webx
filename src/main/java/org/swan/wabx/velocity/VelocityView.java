@@ -194,9 +194,11 @@ public class VelocityView extends AbstractTemplateView implements Configurer {
 		try {
 			EventCartridgeConfigurer eventCartridgeConfigurer = BeanFactoryUtils.beanOfTypeIncludingAncestors(
 					getApplicationContext(), EventCartridgeConfigurer.class, true, false);
-			return eventCartridgeConfigurer.getEventCartridge();
+			return eventCartridgeConfigurer.getObject();
 		} catch (NoSuchBeanDefinitionException ex) {
-			logger.warn("No EventCartridgeConfigurer bean in this web application context.");
+			logger.warn("No EventCartridgeConfigurer bean in this web application context.", ex);
+		} catch (Exception e) {
+			logger.error("autodetectEventCartridge error.", e);
 		}
 		return null;
 	}
