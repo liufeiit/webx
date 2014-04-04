@@ -29,7 +29,7 @@ import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.springframework.web.servlet.view.velocity.VelocityConfig;
 import org.springframework.web.servlet.view.velocity.VelocityToolboxView;
 import org.springframework.web.util.NestedServletException;
-import org.swan.wabx.velocity.extension.EventCartridgeConfigurer;
+import org.swan.wabx.velocity.cartridge.EventCartridgeConfigurer;
 
 /**
  * Velocity模板视图。

@@ -1,4 +1,4 @@
-package org.swan.wabx.velocity.extension;
+package org.swan.wabx.velocity.cartridge;
 
 import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 

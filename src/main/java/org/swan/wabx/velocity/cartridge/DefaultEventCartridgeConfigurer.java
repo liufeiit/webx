@@ -1,4 +1,4 @@
-package org.swan.wabx.velocity.extension;
+package org.swan.wabx.velocity.cartridge;
 
 import java.util.ArrayList;
 import java.util.List;

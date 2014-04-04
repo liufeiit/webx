@@ -4,4 +4,4 @@
  * @version 1.0
  * @since 2014年3月22日 下午8:45:56
  */
-package org.swan.wabx.velocity.extension;
+package org.swan.wabx.velocity.cartridge;
