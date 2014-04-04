@@ -1,6 +1,5 @@
 package org.swan.wabx.velocity;
 
-import java.io.File;
 import java.io.StringWriter;
 import java.util.Locale;
 import java.util.Map;
@@ -38,93 +37,37 @@ import org.swan.wabx.velocity.cartridge.EventCartridgeConfigurer;
  * @version 1.0
  * @since 2014年3月16日 下午5:36:32
  */
-public class VelocityView extends AbstractTemplateView {
-	private static final String DEFAULT_VELOCITY_SUFFIX = ".vm";
-	private static final String DEFAULT_SCREEN_TEMPLATE_KEY = "screen_placeholder";
-	private static final String DEFAULT_VELOCITY_LAYOUT_TEMPLATE = "default";
-	private static final String DEFAULT_LAYOUT = "layout";
-	private static final String DEFAULT_SCREEN = "screen";
-	private static final String DEFAULT_TEMPLATES = "templates";
-	private static final String WEB_INF = "WEB-INF";
-	
-	public static final String PATH_SEPARATOR = File.separator;
-	public static final String DEFAULT_MEDIA_TYPE = MediaType.TEXT_HTML_VALUE;
-	public static final String DEFAULT_CHARSET = "UTF-8";
-	public static final String DEFAULT_DATE_TOOL_NAME = "date";
-	public static final String DEFAULT_NUMBER_TOOL_NAME = "number";
-	
-	protected String dateToolName = DEFAULT_DATE_TOOL_NAME;
-	protected String numberToolName = DEFAULT_NUMBER_TOOL_NAME;
-
-	protected String mediaType = DEFAULT_MEDIA_TYPE;
-	protected String encoding = DEFAULT_CHARSET;
+public class VelocityView extends AbstractTemplateView implements Configurer {
 
 	protected VelocityEngine velocityEngine;
 	protected EventCartridge eventCartridge;
 	
+	/** 时间工具名称 */
+	protected String dateToolName = null;
+	/** 数字工具名称 */
+	protected String numberToolName = null;
+	/** 响应的数据格式 {@link MediaType} */
+	protected String mediaType = null;
+	/** 响应的数据编码格式 */
+	protected String encoding = null;
 	/** 模板文件的根路径目录 */
 	protected String templates = null;
 	/** screen模板解析的视图目录 */
 	protected String screen = null;
 	/** layout模板解析的视图目录 */
 	protected String layout = null;
-
 	/** velocity模板默认加载的layout模板 */
 	protected String defaultLayoutTemplate = null;
 	/** screen模板key */
 	protected String screenTemplateKey = null;
-
 	/** 本次请求对应的视图名称 */
 	protected String viewName = null;
 	/** 模板对应的扩展名称 */
 	protected String suffix = null;
 	
 	protected void init() throws Exception {
-		super.afterPropertiesSet();
-		setContentType(mediaType + ";charset=" + encoding);
 		applyConfigurer();
-	}
-
-	protected void applyConfigurer() {
-		if(StringUtils.isEmpty(templates)) {
-			templates = PATH_SEPARATOR + WEB_INF + PATH_SEPARATOR + DEFAULT_TEMPLATES + PATH_SEPARATOR;
-		} else {
-			if(!StringUtils.startsWith(templates, PATH_SEPARATOR)) {
-				templates = PATH_SEPARATOR + templates;
-			}
-			if(!StringUtils.endsWith(templates, PATH_SEPARATOR)) {
-				templates = templates + PATH_SEPARATOR;
-			}
-		}
-		if(StringUtils.isEmpty(screen)) {
-			screen = DEFAULT_SCREEN + PATH_SEPARATOR;
-		} else {
-			if(StringUtils.startsWith(screen, PATH_SEPARATOR)) {
-				screen = screen.substring(1);
-			}
-			if(!StringUtils.endsWith(screen, PATH_SEPARATOR)) {
-				screen = screen + PATH_SEPARATOR;
-			}
-		}
-		if(StringUtils.isEmpty(layout)) {
-			layout = DEFAULT_LAYOUT + PATH_SEPARATOR;
-		} else {
-			if(StringUtils.startsWith(layout, PATH_SEPARATOR)) {
-				layout = layout.substring(1);
-			}
-			if(!StringUtils.endsWith(layout, PATH_SEPARATOR)) {
-				layout = layout + PATH_SEPARATOR;
-			}
-		}
-		if(StringUtils.isEmpty(defaultLayoutTemplate)) {
-			defaultLayoutTemplate = DEFAULT_VELOCITY_LAYOUT_TEMPLATE;
-		}
-		if(StringUtils.isEmpty(screenTemplateKey)) {
-			screenTemplateKey = DEFAULT_SCREEN_TEMPLATE_KEY;
-		}
-		if(StringUtils.isEmpty(suffix)) {
-			suffix = DEFAULT_VELOCITY_SUFFIX;
-		}
+		setContentType(mediaType + ";charset=" + encoding);
 	}
 
 	/**
@@ -133,8 +76,8 @@ public class VelocityView extends AbstractTemplateView {
 	 * <p>This method can be overridden if custom behavior is needed.
 	 */
 	@Override
-	protected void renderMergedTemplateModel(
-			Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	protected void renderMergedTemplateModel(Map<String, Object> model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		Context velocityContext = createVelocityContext(model, request, response);
 		Context attachContext = attachToContextEvent(velocityContext);
 		exposeToolAttributes(attachContext, request);
@@ -142,15 +85,15 @@ public class VelocityView extends AbstractTemplateView {
 	}
 	
 	protected Context attachToContextEvent(Context velocityContext) {
-		if(getEventCartridge() == null) {
+		if (getEventCartridge() == null) {
 			return velocityContext;
 		}
 		Context eventContext;
 		if (velocityContext instanceof InternalEventContext) {
-            eventContext = velocityContext;
-        } else {
-            eventContext = new VelocityContext(velocityContext);
-        }
+			eventContext = velocityContext;
+		} else {
+			eventContext = new VelocityContext(velocityContext);
+		}
 		EventCartridge ec = getEventCartridge();
 		ec.attachToContext(eventContext);
 		return eventContext;
@@ -223,7 +166,7 @@ public class VelocityView extends AbstractTemplateView {
 	 * @return
 	 */
 	protected Template checkAndGetTemplate(String name) {
-		try {//TODO 优化
+		try {// TODO 优化
 			return getTemplate(name);
 		} catch (Exception e) {
 			logger.error("loading view template [" + name + "] error.", e);
@@ -242,7 +185,7 @@ public class VelocityView extends AbstractTemplateView {
 			// No explicit VelocityEngine: try to autodetect one.
 			setVelocityEngine(autodetectVelocityEngine());
 		}
-		if(getEventCartridge() == null) {
+		if (getEventCartridge() == null) {
 			setEventCartridge(autodetectEventCartridge());
 		}
 	}
@@ -268,14 +211,14 @@ public class VelocityView extends AbstractTemplateView {
 	 */
 	protected VelocityEngine autodetectVelocityEngine() throws BeansException {
 		try {
-			VelocityConfig velocityConfig = BeanFactoryUtils.beanOfTypeIncludingAncestors(
-					getApplicationContext(), VelocityConfig.class, true, false);
+			VelocityConfig velocityConfig = BeanFactoryUtils.beanOfTypeIncludingAncestors(getApplicationContext(),
+					VelocityConfig.class, true, false);
 			return velocityConfig.getVelocityEngine();
 		} catch (NoSuchBeanDefinitionException ex) {
 			throw new ApplicationContextException(
-					"Must define a single VelocityConfig bean in this web application context " +
-					"(may be inherited): VelocityConfigurer is the usual implementation. " +
-					"This bean may be given any name.", ex);
+					"Must define a single VelocityConfig bean in this web application context "
+							+ "(may be inherited): VelocityConfigurer is the usual implementation. "
+							+ "This bean may be given any name.", ex);
 		}
 	}
 
@@ -298,9 +241,8 @@ public class VelocityView extends AbstractTemplateView {
 	 * @see org.apache.velocity.tools.view.context.ChainedContext
 	 * @see VelocityToolboxView
 	 */
-	protected Context createVelocityContext(
-			Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	protected Context createVelocityContext(Map<String, Object> model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		return createVelocityContext(model);
 	}
 
@@ -384,8 +326,7 @@ public class VelocityView extends AbstractTemplateView {
 	 * @throws Exception if thrown by Velocity
 	 * @see org.apache.velocity.Template#merge
 	 */
-	protected void mergeTemplate(
-			Template template, Context context, HttpServletResponse response) throws Exception {
+	protected void mergeTemplate(Template template, Context context, HttpServletResponse response) throws Exception {
 		try {
 			template.merge(context, response.getWriter());
 		} catch (MethodInvocationException ex) {
@@ -410,10 +351,65 @@ public class VelocityView extends AbstractTemplateView {
 
 	@Override
 	public final void afterPropertiesSet() throws Exception {
+		super.afterPropertiesSet();
 		try {
 			init();
 		} catch (Exception e) {
 			logger.error("VelocityView init error.", e);
+		}
+	}
+
+	protected void applyConfigurer() {
+		if (StringUtils.isEmpty(templates)) {
+			templates = PATH_SEPARATOR + WEB_INF + PATH_SEPARATOR + DEFAULT_TEMPLATES + PATH_SEPARATOR;
+		} else {
+			if (!StringUtils.startsWith(templates, PATH_SEPARATOR)) {
+				templates = PATH_SEPARATOR + templates;
+			}
+			if (!StringUtils.endsWith(templates, PATH_SEPARATOR)) {
+				templates = templates + PATH_SEPARATOR;
+			}
+		}
+		if (StringUtils.isEmpty(screen)) {
+			screen = DEFAULT_SCREEN + PATH_SEPARATOR;
+		} else {
+			if (StringUtils.startsWith(screen, PATH_SEPARATOR)) {
+				screen = screen.substring(1);
+			}
+			if (!StringUtils.endsWith(screen, PATH_SEPARATOR)) {
+				screen = screen + PATH_SEPARATOR;
+			}
+		}
+		if (StringUtils.isEmpty(layout)) {
+			layout = DEFAULT_LAYOUT + PATH_SEPARATOR;
+		} else {
+			if (StringUtils.startsWith(layout, PATH_SEPARATOR)) {
+				layout = layout.substring(1);
+			}
+			if (!StringUtils.endsWith(layout, PATH_SEPARATOR)) {
+				layout = layout + PATH_SEPARATOR;
+			}
+		}
+		if (StringUtils.isEmpty(defaultLayoutTemplate)) {
+			defaultLayoutTemplate = DEFAULT_VELOCITY_LAYOUT_TEMPLATE;
+		}
+		if (StringUtils.isEmpty(screenTemplateKey)) {
+			screenTemplateKey = DEFAULT_SCREEN_TEMPLATE_KEY;
+		}
+		if (StringUtils.isEmpty(suffix)) {
+			suffix = DEFAULT_VELOCITY_SUFFIX;
+		}
+		if (StringUtils.isEmpty(dateToolName)) {
+			dateToolName = DEFAULT_DATE_TOOL_NAME;
+		}
+		if (StringUtils.isEmpty(numberToolName)) {
+			numberToolName = DEFAULT_NUMBER_TOOL_NAME;
+		}
+		if (StringUtils.isEmpty(mediaType)) {
+			mediaType = DEFAULT_MEDIA_TYPE;
+		}
+		if (StringUtils.isEmpty(encoding)) {
+			encoding = DEFAULT_CHARSET;
 		}
 	}
 
