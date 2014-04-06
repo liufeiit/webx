@@ -46,13 +46,13 @@ public class DefaultEventCartridgeConfigurer implements EventCartridgeConfigurer
 				Object handler = BeanUtils.instantiateClass(ClassUtils.getDefaultClassLoader().loadClass(h));
 				boolean result = false;
                 if (handler instanceof ReferenceInsertionEventHandler) {
-                    result = getObject().addEventHandler((ReferenceInsertionEventHandler) handler);
+                    result = getEventCartridge().addEventHandler((ReferenceInsertionEventHandler) handler);
                 }
                 if (handler instanceof NullSetEventHandler) {
-                    result = getObject().addEventHandler((NullSetEventHandler) handler);
+                    result = getEventCartridge().addEventHandler((NullSetEventHandler) handler);
                 }
                 if (handler instanceof MethodExceptionEventHandler) {
-                    result = getObject().addEventHandler((MethodExceptionEventHandler) handler);
+                    result = getEventCartridge().addEventHandler((MethodExceptionEventHandler) handler);
                 }
                 log.info("Added EventCartridge : " + handler.getClass().getName() + " : " + result);
 			} catch (Throwable e) {
@@ -66,17 +66,7 @@ public class DefaultEventCartridgeConfigurer implements EventCartridgeConfigurer
 	}
 
 	@Override
-	public EventCartridge getObject() throws Exception {
+	public EventCartridge getEventCartridge() {
 		return eventCartridge;
-	}
-
-	@Override
-	public Class<?> getObjectType() {
-		return EventCartridge.class;
-	}
-
-	@Override
-	public boolean isSingleton() {
-		return true;
 	}
 }
