@@ -1,4 +1,4 @@
-package org.swan.wabx.velocity.cartridge;
+package org.swan.wabx.velocity;
 
 /**
  * 表示一个可以渲染到页面上面的对象。

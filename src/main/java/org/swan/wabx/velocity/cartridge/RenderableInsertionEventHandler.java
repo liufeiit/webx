@@ -1,6 +1,7 @@
 package org.swan.wabx.velocity.cartridge;
 
 import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
+import org.swan.wabx.velocity.Renderable;
 
 /**
  * 渲染<code>Renderable</code>的event handler。

@@ -14,7 +14,6 @@ import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
 import org.apache.velocity.runtime.resource.loader.JarResourceLoader;
 import org.apache.velocity.runtime.resource.loader.URLResourceLoader;
 import org.apache.velocity.tools.view.WebappResourceLoader;
-import org.swan.wabx.velocity.Configurer;
 
 /**
  * Velocity模板引擎配置。
@@ -23,8 +22,7 @@ import org.swan.wabx.velocity.Configurer;
  * @version 1.0
  * @since 2014年4月4日 下午11:25:02
  */
-public class VelocityConfigurer extends org.springframework.web.servlet.view.velocity.VelocityConfigurer implements
-		Configurer {
+public class VelocityConfigurer extends org.springframework.web.servlet.view.velocity.VelocityConfigurer {
 	public static final String DEFAULT_INPUT_ENCODING = "UTF-8";
 	public static final String DEFAULT_OUTPUT_ENCODING = "UTF-8";
 	public static final String DEFAULT_TEMPLATE_MODIFICATION_CHECK_INTERVAL = "3";
