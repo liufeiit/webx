@@ -5,33 +5,38 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTextField;
-import wicket.markup.html.WebPage;
-import wicket.markup.html.form.Form;
-import wicket.model.Model;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.model.Model;
 
-public class AjaxWorld extends WebPage {
-   	private List names = Arrays.asList(new String[] { "Kumarsun", "Ramkishore", 
-   	  "Kenneth", "Kingston", "Raju", "Rakesh", "Vijay", "Venkat", "Sachin" });
+import com.googlecode.wicket.jquery.ui.form.autocomplete.AutoCompleteTextField;
 
-   	public AjaxWorld() {
+public class AutoCompleteName extends WebPage {
+	private static final long serialVersionUID = 1L;
+	private List<String> names = Arrays.asList(new String[] { "Kumarsun", "Ramkishore", "Kenneth", "Kingston", "Raju",
+			"Rakesh", "Vijay", "Venkat", "Sachin" });
 
-      Form form = new Form("form");
-      AutoCompleteTextField txtName = new AutoCompleteTextField("name", new Model()){
+	public AutoCompleteName() {
 
-         protected Iterator getChoices(String input) {
-            			List probables = new ArrayList();
-            			Iterator iter = names.iterator();
-            			while (iter.hasNext()) {
-               				String name = (String) iter.next();
-               				if (name.startsWith(input)) {
-                  					probables.add(name);
-               				}
-            			}
-            			return probables.iterator();
-         		}
-      	};
-   	form.add(txtName);
-   	add(form);
-   }
+		Form<String> form = new Form<String>("form");
+		AutoCompleteTextField<String> txtName = new AutoCompleteTextField<String>("name", new Model<String>()) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected List<String> getChoices(String input) {
+				List<String> probables = new ArrayList<String>();
+				Iterator<String> iter = names.iterator();
+				while (iter.hasNext()) {
+					String name = (String) iter.next();
+					if (name.startsWith(input)) {
+						probables.add(name);
+					}
+				}
+				return probables;
+			}
+
+		};
+		form.add(txtName);
+		add(form);
+	}
 }
