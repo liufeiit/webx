@@ -1,8 +1,12 @@
 package wicket;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.http.WicketFilter;
 import org.apache.wicket.protocol.http.WicketServlet;
+import org.apache.wicket.settings.IExceptionSettings.UnexpectedExceptionDisplay;
+import org.apache.wicket.settings.def.ApplicationSettings;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.nio.SelectChannelConnector;
 import org.mortbay.jetty.servlet.Context;
@@ -17,7 +21,15 @@ import org.mortbay.thread.QueuedThreadPool;
  */
 public class WicketServer {
 	
-	private static class App extends WebApplication {
+	public static class App extends WebApplication {
+		public App() {
+			super();
+			setConfigurationType(RuntimeConfigurationType.DEPLOYMENT);
+//			getApplicationSettings().set
+//			getExceptionSettings().setUnexpectedExceptionDisplay(UnexpectedExceptionDisplay.getValues(c));
+//			getSettings().setUnexpectedExceptionDisplay(ApplicationSettings.);
+		}
+
 		@Override
 		public Class<? extends Page> getHomePage() {
 			return AutoCompleteName.class;
@@ -25,7 +37,7 @@ public class WicketServer {
 		
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Server server = new Server();
 		SelectChannelConnector selectChannelConnector = new SelectChannelConnector();
 		selectChannelConnector.setPort(8080);
@@ -42,7 +54,9 @@ public class WicketServer {
 		Context context = new Context(server, "/", Context.NO_SESSIONS);
 		ServletHolder wicketServletHolder = new ServletHolder(new WicketServlet());
 		wicketServletHolder.setInitParameter("applicationClassName", App.class.getName());
+		wicketServletHolder.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, "/wicket/*");
 		context.addServlet(wicketServletHolder, "/wicket/*");
 		context.setEventListeners(null);
+		server.start();
 	}
 }

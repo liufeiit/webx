@@ -327,11 +327,11 @@
 			<artifactId>wicketstuff-editable-grid</artifactId>
 			<version>6.14.0</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-logback</artifactId>
 			<version>6.14.0</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-util</artifactId>
