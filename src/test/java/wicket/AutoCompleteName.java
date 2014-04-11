@@ -24,15 +24,16 @@ public class AutoCompleteName extends WebPage {
 
 			@Override
 			protected List<String> getChoices(String input) {
-				List<String> probables = new ArrayList<String>();
-				Iterator<String> iter = names.iterator();
-				while (iter.hasNext()) {
-					String name = (String) iter.next();
-					if (name.startsWith(input)) {
-						probables.add(name);
-					}
-				}
-				return probables;
+				return names;
+//				List<String> probables = new ArrayList<String>();
+//				Iterator<String> iter = names.iterator();
+//				while (iter.hasNext()) {
+//					String name = (String) iter.next();
+//					if (name.startsWith(input)) {
+//						probables.add(name);
+//					}
+//				}
+//				return probables;
 			}
 
 		};

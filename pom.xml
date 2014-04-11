@@ -24,64 +24,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<!-- 
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>http://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>Spring-Release</id>
-			<name>Spring Release</name>
-			<url>http://repo.springsource.org/release</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jboss-public-repository-group</id>
-			<name>JBoss Public Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jboss-deprecated</id>
-			<name>JBoss Deprecated</name>
-			<url>https://repository.jboss.org/nexus/content/repositories/deprecated</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jboss-maven2-brew</id>
-			<name>JBoss Maven 2 Brew Repository</name>
-			<url>http://repository.jboss.org/maven2-brew</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		 -->
 	</repositories>
 
 	<distributionManagement>
@@ -93,24 +35,82 @@
 	</distributionManagement>
 
 	<dependencies>
-	
+
 		<dependency>
-    <groupId> org.apache.cassandra</groupId>
-    <artifactId>cassandra-all</artifactId>
-    <version>0.8.1</version>
+			<groupId>com.alibaba.citrus.sample</groupId>
+			<artifactId>archetype-webx-quickstart</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba.citrus</groupId>
+			<artifactId>citrus-test-all</artifactId>
+			<version>3.2.4</version>
+		</dependency>
 
-    <exclusions>
-      <exclusion> 
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-      </exclusion>
-      <exclusion> 
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-      </exclusion>
-    </exclusions> 
+		<dependency>
+			<groupId>com.alibaba.citrus</groupId>
+			<artifactId>citrus-webx-all</artifactId>
+			<version>3.2.4</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-aop</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-expression</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-web</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-context-support</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-tx</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-jdbc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-orm</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+      				<artifactId>spring-webmvc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-  </dependency>
+		<dependency>
+			<groupId>org.apache.cassandra</groupId>
+			<artifactId>cassandra-all</artifactId>
+			<version>0.8.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
@@ -192,11 +192,8 @@
 			<artifactId>wicket-extensions</artifactId>
 			<version>6.14.0</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket</artifactId>
-			<version>6.14.0</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.apache.wicket</groupId> <artifactId>wicket</artifactId> 
+			<version>6.14.0</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-spring</artifactId>
@@ -327,11 +324,8 @@
 			<artifactId>wicketstuff-editable-grid</artifactId>
 			<version>6.14.0</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-logback</artifactId>
-			<version>6.14.0</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.wicketstuff</groupId> <artifactId>wicketstuff-logback</artifactId> 
+			<version>6.14.0</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-util</artifactId>
@@ -409,7 +403,7 @@
 			<artifactId>jsp-2.1</artifactId>
 			<version>6.1.14</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -690,6 +684,13 @@
 	</dependencies>
 
 	<build>
+		<extensions>
+            <extension>
+                <groupId>org.apache.maven.archetype</groupId>
+                <artifactId>archetype-packaging</artifactId>
+            </extension>
+        </extensions>
+        
 		<finalName>wabx</finalName>
 		<resources>
 			<resource>
@@ -698,6 +699,16 @@
 			</resource>
 		</resources>
 		<plugins>
+			<plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
