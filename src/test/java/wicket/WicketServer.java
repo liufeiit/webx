@@ -51,7 +51,7 @@ public class WicketServer {
 		poolInstance.setMaxIdleTimeMs(3000);
 		poolInstance.setMinThreads(500);
 		server.setThreadPool(poolInstance);
-		Context context = new Context(server, "/", Context.NO_SESSIONS);
+		Context context = new Context(server, "/", Context.SESSIONS);
 		ServletHolder wicketServletHolder = new ServletHolder(new WicketServlet());
 		wicketServletHolder.setInitParameter("applicationClassName", App.class.getName());
 		wicketServletHolder.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, "/wicket/*");
