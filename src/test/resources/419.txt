@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>4.19来了！</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="application-name" content="敢聊-看你敢不敢聊" />
+<meta name="msapplication-navbutton-color" content="#C3E9F6"/>
+<meta name="msapplication-window" content="width=device-width;height=device-height" />
+<meta name="msapplication-tooltip" content="敢聊-看你敢不敢聊" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body style="background-color: #FFFFFF; margin: 0px auto; padding: 0px;width: 100%">
+	<div class="cl bl">
+		<img class="title" src="http://ganliaotv.qiniudn.com/title@2x.jpg" width="350px"/>
+	</div>
+	<div class="ctx bl">
+        &nbsp;&nbsp;&nbsp;&nbsp;[活动详情]
+	</div>
+	<div class="ctx bl">
+        &nbsp;&nbsp;1.礼物全场一律<label>“8折”</label>
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;2.男生4.19当日富豪榜前5名获得实物<label>“飞机杯”</label>！
+    有了飞机杯，再也不寂寞！
+	</div>
+	<div class="cl">
+		<img class="item" src="http://ganliaotv.qiniudn.com/fjb@2x.jpg" width="200px"/>
+	</div>
+	<div class="ctx bl">
+		&nbsp;&nbsp;3.女生4.19当日魅力榜前30名送大礼
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;<label>特等奖：当日魅力榜  第1名</label>
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;一等奖：当日魅力榜  第2名
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;二等奖：当日魅力榜  第3名
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;三等奖：当日魅力榜  第4名-第10名
+	</div>
+	<div class="ctx bl">
+		&nbsp;&nbsp;&nbsp;&nbsp;参与奖：当日魅力榜  第11名-第30名
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;奖品内容：
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;特等奖奖品：<label>苹果ipod一台</label>   1名
+	</div>
+	<div class="cl">
+		<img class="item" src="http://ganliaotv.qiniudn.com/ipod@2x.jpg" width="200px"/>
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;一等奖奖品：<label>索尼耳机一部</label>   1名
+	</div>
+	<div class="cl">
+		<img class="item" src="http://ganliaotv.qiniudn.com/ej@2x.jpg" width="200px"/>
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;二等奖奖品：<label>s炫酷耳钉一枚</label>   1名
+	</div>
+	<div class="cl">
+		<img class="item" src="http://ganliaotv.qiniudn.com/ed@2x.jpg" width="200px"/>
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;三等奖奖品：精美娃娃一个
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;&nbsp;&nbsp;参与奖奖品：精美钥匙扣一个
+	</div>
+	<div class="ctx bl">
+		&nbsp;&nbsp;&nbsp;&nbsp;（奖品以实物为准）
+	</div>
+	<div class="ctx">
+		&nbsp;&nbsp;女生们男生们，你们还犹豫什么！ 一夜容易，情不易，且玩且珍惜！
+	</div>
+</body>
+<style type="text/css">
+	img {
+		border: 0px;
+	}
+	div {
+		width: 350px;
+		height: auto;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	label {
+		color: #e60012;
+	}
+	.cl {
+		text-align: center;
+	}
+	.title {
+		margin: 5px 0 0 0;
+	}
+	.bl{
+		margin-bottom: 10px;
+	}
+	.item {
+
+	}
+	.ctx {
+
+	}
+	@media screen and (min-width:320px){
+	    #adslide {height:120px;}
+	    #adslidecont {height:120px;}
+	    #adslide li {height:120px;}
+	    #adslide li img {height:120px;}
+		#gamealbum li,#appalbum li {height:90px;}
+	    #gamealbum li img,#appalbum li img {height:90px;}
+	}
+	@media screen and (min-width:360px){
+	    #adslide {height:135px;}
+	    #adslidecont {height:135px;}
+	    #adslide li {height:135px;}
+	    #adslide li img {height:135px;}
+		#gamealbum li,#appalbum li {height:100px;}
+	    #gamealbum li img,#appalbum li img {height:100px;}
+	}
+	@media screen and (min-width:384px){
+	    #adslide {height:143px;}
+	    #adslidecont {height:143px;}
+	    #adslide li {height:143px;}
+	    #adslide li img {height:143px;}
+		#gamealbum li,#appalbum li {height:107px;}
+	    #gamealbum li img,#appalbum li img {height:107px;}
+	}
+	@media screen and (min-width:480px){
+	    #adslide {height:180px;}
+	    #adslidecont {height:180px;}
+	    #adslide li {height:180px;}
+	    #adslide li img {height:180px;}
+		#gamealbum li,#appalbum li {height:135px;}
+	    #gamealbum li img,#appalbum li img {height:135px;}
+	}
+	@media screen and (min-width:768px){
+	    #adslide {height:288px;}
+	    #adslidecont {height:288px;}
+	    #adslide li {height:288px;}
+	    #adslide li img {height:288px;}
+		#gamealbum li,#appalbum li {height:216px;}
+	    #gamealbum li img,#appalbum li img {height:216px;}
+	}
+	@media screen and (min-width:1024px){
+	    #adslide {height:384px;}
+	    #adslidecont {height:384px;}
+	    #adslide li {height:384px;}
+	    #adslide li img {height:384px;}
+		#gamealbum li,#appalbum li {height:288px;}
+	    #gamealbum li img,#appalbum li img {height:288px;}
+	}
+</style>
+</html>

@@ -1,5 +1,17 @@
 package wicket;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -36,6 +48,18 @@ public class WicketServer {
 		}
 		
 	}
+	
+	public static void main1(String[] args) throws Exception {
+		StringBuffer b = new StringBuffer();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(WicketServer.class.getResourceAsStream("/419.txt")));
+		String line = reader.readLine();
+		while(line != null) {
+			b.append(line);
+			line = reader.readLine();
+		}
+		reader.close();
+		System.out.println(b.toString());
+	}
 
 	public static void main(String[] args) throws Exception {
 		Server server = new Server();
@@ -52,7 +76,27 @@ public class WicketServer {
 		poolInstance.setMinThreads(500);
 		server.setThreadPool(poolInstance);
 		Context context = new Context(server, "/", Context.SESSIONS);
-		ServletHolder wicketServletHolder = new ServletHolder(new WicketServlet());
+//		ServletHolder wicketServletHolder = new ServletHolder(new WicketServlet());
+		ServletHolder wicketServletHolder = new ServletHolder(new HttpServlet() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
+					IOException {
+				resp.setContentType("text/html;charset=UTF-8");
+				StringBuffer b = new StringBuffer();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(WicketServer.class.getResourceAsStream("/419.txt")));
+				String line = reader.readLine();
+				while(line != null) {
+					b.append(line);
+					line = reader.readLine();
+				}
+				reader.close();
+				resp.getWriter().write(b.toString());
+				resp.getWriter().flush();
+				resp.getWriter().close();
+			}
+		});
 		wicketServletHolder.setInitParameter("applicationClassName", App.class.getName());
 		wicketServletHolder.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, "/wicket/*");
 		context.addServlet(wicketServletHolder, "/wicket/*");
